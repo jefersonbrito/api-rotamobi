@@ -19,7 +19,7 @@ $router->get('/key', function() {
     return \Illuminate\Support\Str::random(32);
 });
 
-$router->post('/login', ['as' => 'login', 'uses' => 'UsersController@login']);
+$router->get('/login', ['as' => 'login', 'uses' => 'UsersController@login']);
 $router->post('/logout', ['as' => 'logout', 'uses' => 'UsersController@logout']);
 
 Route::group(['prefix' => 'driver'], function($router) {
