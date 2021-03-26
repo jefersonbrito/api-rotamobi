@@ -11,7 +11,6 @@
   | and give it the Closure to call when that URI is requested.
   |
  */
-
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
@@ -25,16 +24,9 @@ $router->get('/getDrivers', function() {
 });
 
 $router->post('/setDriverPosition', function(Illuminate\Http\Request $request) {
-    
-    $data = $driver->response->json($driver);
-    
-    
-    return $data;
-    
-    $driver = App\Models\Driver::find(1);
-    $driver->lat = -12.85557;
-    $driver->lng = -38.28331;
-
+    $driver = App\Models\Driver::find($request->id);
+    $driver->lat = $request->lat;
+    $driver->lng = $request->lng;
     return $driver->save();
 });
 
