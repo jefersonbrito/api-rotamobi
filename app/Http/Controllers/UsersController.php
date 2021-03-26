@@ -6,7 +6,6 @@ use Tymon\JWTAuth\JWTAuth;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-
 class UsersController extends Controller {
 
     protected $jwt;
@@ -18,8 +17,9 @@ class UsersController extends Controller {
      */
     public function __construct(JWTAuth $jwt) {
         $this->jwt = $jwt;
+        $this->middleware('auth:api');
     }
-    
+
     /**
      * 
      * @param Request $request
@@ -30,10 +30,19 @@ class UsersController extends Controller {
             'password' => 'required'
         ]);
 
-        if (! $token = $this->jwt->attempt($request->only('email', 'password'))) {
+        if (!$token = $this->jwt->attempt($request->only('email', 'password'))) {
             return response()->json(['Usuário não encontrado'], 404);
         }
         return response()->json(compact('token'));
+    }
+
+    /**
+     * 
+     * @param Request $request
+     */
+    public function logout() {
+        Auth::logout();
+        return response()->json(['Usuário deslogado']);
     }
 
     //

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Driver;
+use Tymon\JWTAuth\JWTAuth;
+use Illuminate\Support\Facades\Auth;
 
 
 class DriversController extends Controller {
@@ -13,8 +15,9 @@ class DriversController extends Controller {
      *
      * @return void
      */
-    public function __construct() {
-        //
+    public function __construct(JWTAuth $jwt) {
+         $this->jwt = $jwt;
+          $this->middleware('auth:api');
     }
 
     /**
