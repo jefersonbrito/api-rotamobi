@@ -24,7 +24,13 @@ $router->get('/getDrivers', function() {
     return response()->json(App\Models\Driver::all());
 });
 
-$router->get('/setDriverPosition', function() {
+$router->post('/setDriverPosition', function(Illuminate\Http\Request $request) {
+    
+    $data = $driver->response->json($driver);
+    
+    
+    return $data;
+    
     $driver = App\Models\Driver::find(1);
     $driver->lat = -12.85557;
     $driver->lng = -38.28331;
