@@ -19,15 +19,13 @@ $router->get('/key', function() {
     return \Illuminate\Support\Str::random(32);
 });
 
-$router->get('/getDrivers', function() {
-    return response()->json(App\Models\Driver::all());
+$router->post('/login', ['as' => 'login', 'uses' => 'UsersController@login']);
+
+Route::group(['prefix' => 'driver'], function($router) {
+    $router->get('/getDrivers', ['as' => 'driver.getDrivers', 'uses' => 'DriversController@getDrivers']);
+    $router->put('/setDriverPosition', ['as' => 'driver.setDriverPosition', 'uses' => 'DriversController@setDriverPosition']);
 });
 
-$router->post('/setDriverPosition', function(Illuminate\Http\Request $request) {
-    $driver = App\Models\Driver::find($request->id);
-    $driver->lat = $request->lat;
-    $driver->lng = $request->lng;
-    return $driver->save();
+Route::group(['prefix' => 'user'], function($router) {
+    
 });
-
-
