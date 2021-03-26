@@ -17,7 +17,10 @@ class UsersController extends Controller {
      */
     public function __construct(JWTAuth $jwt) {
         $this->jwt = $jwt;
-        $this->middleware('auth:api');
+
+        $this->middleware('auth:api', [
+            'except' => ['login']
+        ]);
     }
 
     /**
