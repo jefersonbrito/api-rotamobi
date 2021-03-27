@@ -22,7 +22,7 @@ $router->get('/key', function() {
 
 
 Route::group(['prefix' => 'driver'], function($router) {
-    $router->get('/login', ['as' => 'login', 'uses' => 'UsersController@login']);
+    $router->post('/login', ['as' => 'login', 'uses' => 'UsersController@login']);
     $router->post('/logout', ['as' => 'logout', 'uses' => 'UsersController@logout']);
     $router->post('/getDrivers', ['as' => 'driver.getDrivers', 'uses' => 'DriversController@getDrivers']);
     $router->put('/setDriverPosition', ['as' => 'driver.setDriverPosition', 'uses' => 'DriversController@setDriverPosition']);
