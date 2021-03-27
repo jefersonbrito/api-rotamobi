@@ -19,10 +19,11 @@ $router->get('/key', function() {
     return \Illuminate\Support\Str::random(32);
 });
 
-$router->get('/login', ['as' => 'login', 'uses' => 'UsersController@login']);
-$router->post('/logout', ['as' => 'logout', 'uses' => 'UsersController@logout']);
+
 
 Route::group(['prefix' => 'driver'], function($router) {
+    $router->get('/login', ['as' => 'login', 'uses' => 'UsersController@login']);
+    $router->post('/logout', ['as' => 'logout', 'uses' => 'UsersController@logout']);
     $router->post('/getDrivers', ['as' => 'driver.getDrivers', 'uses' => 'DriversController@getDrivers']);
     $router->put('/setDriverPosition', ['as' => 'driver.setDriverPosition', 'uses' => 'DriversController@setDriverPosition']);
 });
